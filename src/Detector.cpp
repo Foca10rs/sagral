@@ -19,7 +19,7 @@ void Detector::detect(VideoCapture & cap)
          {
              break;
          }
-         imshow("Image_raw",img);
+         
 
          cvtColor(img,imgHSV,COLOR_BGR2HSV);
          
@@ -58,6 +58,7 @@ void Detector::detect(VideoCapture & cap)
          if(mask_area == orange_area)               //通过面积判断现在是哪个面
          {
              inRange(imgHSV,Scalar(27,0,5),Scalar(139,255,76),mask_show);
+             putText(img,"orange",Point(20,50),FONT_HERSHEY_SIMPLEX,1.0,Scalar(0,0,0),2);
          }
          
          if(mask_area == yellow_area)               //前一个面像素数少于一千时认定已翻过去，采用该面和下一面均符合条件的二值化范围
@@ -68,6 +69,7 @@ void Detector::detect(VideoCapture & cap)
                  morphologyEx(mask_show,mask_show,MORPH_GRADIENT,kernel);
              }
              inRange(imgHSV,Scalar(27,0,5),Scalar(139,255,76),mask_show);
+             putText(img,"yellow",Point(20,50),FONT_HERSHEY_SIMPLEX,1.0,Scalar(0,0,0));
          }
          
          if(mask_area == red_area)
@@ -79,6 +81,7 @@ void Detector::detect(VideoCapture & cap)
                  dilate(mask_show,mask_show,kernel);
              }
              inRange(imgHSV,Scalar(0,0,0),Scalar(179,69,39),mask_show);
+             putText(img,"red",Point(20,50),FONT_HERSHEY_SIMPLEX,1.0,Scalar(0,0,0),2);
          }
          
          if(mask_area == white_area)
@@ -90,6 +93,7 @@ void Detector::detect(VideoCapture & cap)
                  dilate(mask_show,mask_show,kernel);
              }
              inRange(imgHSV,Scalar(0,0,0),Scalar(179,255,43),mask_show);
+             putText(img,"white",Point(20,50),FONT_HERSHEY_SIMPLEX,1.0,Scalar(0,0,0),2);
          }
          
          if(mask_area == blue_area)
@@ -101,9 +105,12 @@ void Detector::detect(VideoCapture & cap)
                  //dilate(mask_show,mask_show,kernel);
              }
              inRange(imgHSV,Scalar(0,0,0),Scalar(179,255,29),mask_show);
+             putText(img,"blue",Point(20,50),FONT_HERSHEY_SIMPLEX,1.0,Scalar(0,0,0),2);
          }
          
          imshow("Image_binary",mask_show);
+
+         imshow("Image_raw",img);
 
          waitKey(33);
      }
@@ -119,5 +126,5 @@ void Detector::detect(Mat &img)
      {
          drawDetectedMarkers(img, corners, ids);
      }
-    imshow("result", img);
+     imshow("result", img);
 }

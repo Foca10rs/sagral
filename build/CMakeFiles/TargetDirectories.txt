@@ -1,3 +1,0 @@
-/home/sagral/C++/第二次小作业/build/CMakeFiles/work.dir
-/home/sagral/C++/第二次小作业/build/CMakeFiles/edit_cache.dir
-/home/sagral/C++/第二次小作业/build/CMakeFiles/rebuild_cache.dir
